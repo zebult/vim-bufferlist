@@ -88,9 +88,9 @@ function! BufferList()
       endif
       " fill the name with spaces --> gives a nice selection bar
       " use MAX width here, because the width may change inside of this 'for' loop
-      while strlen(l:bufname) < g:BufferListMaxWidth
-        let l:bufname = l:bufname . ' '
-      endwhile
+      "while strlen(l:bufname) < g:BufferListMaxWidth
+        "let l:bufname = l:bufname . ' '
+      "endwhile
       " add the name to the list
       let l:buflist = l:buflist . '  ' .l:bufname . "\n"
     endif
