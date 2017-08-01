@@ -101,7 +101,9 @@ function! BufferList()
   let l:fill = "\n"
   
   " now, create the buffer & set it up
+  exec 'set nospr'
   exec 'silent! ' . l:width . 'vne __BUFFERLIST__'
+  exec 'set spr'
   setlocal noshowcmd
   setlocal noswapfile
   setlocal buftype=nofile
