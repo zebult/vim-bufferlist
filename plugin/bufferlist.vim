@@ -99,9 +99,6 @@ function! BufferList()
   " generate a variable to fill the buffer afterwards
   " (we need this for "full window" color :)
   let l:fill = "\n"
-  let l:i = 0 | while l:i < l:width | let l:i = l:i + 1
-    let l:fill = ' ' . l:fill
-  endwhile
   
   " now, create the buffer & set it up
   exec 'silent! ' . l:width . 'vne __BUFFERLIST__'
@@ -119,8 +116,6 @@ function! BufferList()
     syn clear
     syn match BufferNormal /  .*/
     syn match BufferSelected /> .*/hs=s+1
-    hi def BufferNormal ctermfg=black ctermbg=white
-    hi def BufferSelected ctermfg=white ctermbg=black
   endif
 
   setlocal modifiable
