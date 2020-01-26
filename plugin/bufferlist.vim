@@ -105,10 +105,10 @@ function! BufferListWrite()
       endif
 
       if bufwinnr(l:i) == winnr()
-        let l:bufname = '▶ ' . l:bufname
+        " let l:bufname = '▶ ' . l:bufname
       endif
       if getbufvar(l:i, '&modified')
-        let l:bufname = '⭕️' . l:bufname
+        " let l:bufname = '⭕️' . l:bufname
       endif
       " count displayed buffers
       let l:displayedbufs = l:displayedbufs + 1
