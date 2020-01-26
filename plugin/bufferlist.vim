@@ -39,14 +39,40 @@ if !exists('g:BufferListMaxWidth')
   let g:BufferListMaxWidth = 40
 endif
 
+let s:DoingUpdateBufferList = 0
+
+augroup BufferListAutoCmds
+  autocmd!
+  autocmd BufEnter * call BufferListUpdate()
+augroup END
+
+function! BufferListUpdate()
+  if s:DoingUpdateBufferList == 1
+    return
+  endif
+
+  if !bufexists(bufnr("__BUFFERLIST__"))
+    return
+  endif
+
+  call BufferList()
+endfunction
+
 " toggled the buffer list on/off
 function! BufferList()
   " if we get called and the list is open --> close it
   if bufexists(bufnr("__BUFFERLIST__"))
     exec ':' . bufnr("__BUFFERLIST__") . 'bwipeout'
-    return
   endif
 
+  let s:DoingUpdateBufferList = 1
+  call BufferListWrite()
+  wincmd H
+  wincmd p
+  let s:DoingUpdateBufferList = 0
+endfunction
+
+function! BufferListWrite()
   let l:bufcount = bufnr('$')
   let l:displayedbufs = 0
   let l:activebuf = bufnr('')
