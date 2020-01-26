@@ -73,10 +73,10 @@ function! BufferList()
       endif
 
       if bufwinnr(l:i) != -1
-        let l:bufname = l:bufname . '*'
+        let l:bufname = '▶ ' . l:bufname
       endif
       if getbufvar(l:i, '&modified')
-        let l:bufname = l:bufname . '+'
+        let l:bufname = '⭕️' . l:bufname
       endif
       " count displayed buffers
       let l:displayedbufs = l:displayedbufs + 1
