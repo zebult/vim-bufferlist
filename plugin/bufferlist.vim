@@ -57,7 +57,13 @@ function! BufferList()
 
   " iterate through the buffers
   let l:i = 0 | while l:i <= l:bufcount | let l:i = l:i + 1
-    let l:bufname = bufname(l:i)
+    let l:relativepath = bufname(l:i)
+    let l:path_list = split(l:relativepath,'/')
+
+    if len(l:path_list) > 0
+      let l:bufname = l:path_list[-1]
+    endif
+
     if strlen(l:bufname)
       \&& getbufvar(l:i, '&modifiable')
       \&& getbufvar(l:i, '&buflisted')
