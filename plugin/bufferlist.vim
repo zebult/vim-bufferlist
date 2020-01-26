@@ -55,7 +55,15 @@ function! BufferListUpdate()
     return
   endif
 
-  call BufferList()
+  if @% == "__BUFFERLIST__"
+    return
+  endif
+
+  if bufexists(bufnr("__BUFFERLIST__"))
+    exec ':' . bufnr("__BUFFERLIST__") . 'bwipeout'
+  endif
+
+  call BufferListWrite()
 endfunction
 
 " toggled the buffer list on/off
@@ -63,16 +71,15 @@ function! BufferList()
   " if we get called and the list is open --> close it
   if bufexists(bufnr("__BUFFERLIST__"))
     exec ':' . bufnr("__BUFFERLIST__") . 'bwipeout'
+    return
   endif
 
-  let s:DoingUpdateBufferList = 1
   call BufferListWrite()
-  wincmd H
-  wincmd p
-  let s:DoingUpdateBufferList = 0
 endfunction
 
 function! BufferListWrite()
+  let s:DoingUpdateBufferList = 1
+
   let l:bufcount = bufnr('$')
   let l:displayedbufs = 0
   let l:activebuf = bufnr('')
@@ -204,6 +211,11 @@ function! BufferListWrite()
 
   " go to the correct line
   call BufferListMove(l:activebufline)
+
+  wincmd H
+  exec 'vertical resize ' . l:width
+  wincmd p
+  let s:DoingUpdateBufferList = 0
 endfunction
 
 " move the selection bar of the list:
