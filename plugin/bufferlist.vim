@@ -78,7 +78,7 @@ function! BufferList()
         endif
       endif
 
-      if bufwinnr(l:i) != -1
+      if bufwinnr(l:i) == winnr()
         let l:bufname = '▶ ' . l:bufname
       endif
       if getbufvar(l:i, '&modified')
