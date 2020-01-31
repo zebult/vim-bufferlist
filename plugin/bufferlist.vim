@@ -214,7 +214,9 @@ function! BufferListWrite()
 
   wincmd H
   exec 'vertical resize ' . l:width
+  set wfw
   wincmd p
+  wincmd =
   let s:DoingUpdateBufferList = 0
 endfunction
 
