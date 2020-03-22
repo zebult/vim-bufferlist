@@ -95,6 +95,8 @@ function! BufferListWrite()
 
     if len(l:path_list) > 0
       let l:bufname = l:path_list[-1]
+    else
+      let l:bufname = 'none'
     endif
 
     if strlen(l:bufname)
